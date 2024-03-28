@@ -1,0 +1,15 @@
+slack_sdk
+notion-util
+notion-client
+PyGithub
+requests
+selenium
+pluginbase
+youtube-transcript-api
+functions-framework
+sentry-sdk
+beautifulsoup4
+awslambdaric
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib

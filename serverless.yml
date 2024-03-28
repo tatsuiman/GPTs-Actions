@@ -1,0 +1,288 @@
+service: GPTs-Actions
+frameworkVersion: '3'
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: ap-northeast-1
+  stage: ${opt:stage, 'dev'}
+  logRetentionInDays: 7
+  timeout: 30
+  memorySize: 128
+  ecr:
+    images:
+      gpts-functions:
+        file: Dockerfile
+        path: ./src
+        platform: linux/amd64
+
+  environment:
+    LOG_LEVEL: 'info'
+    SENTRY_DSN: ${env:SENTRY_DSN}
+    NOTION_SECRET: ${env:NOTION_SECRET}
+    DATABASE_ID: ${env:DATABASE_ID}
+    GITHUB_TOKEN: ${env:GITHUB_TOKEN}
+    GOOGLE_CSE_ID: ${env:GOOGLE_CSE_ID}
+    GOOGLE_API_KEY: ${env:GOOGLE_API_KEY}
+    INTELX_API_KEY: ${env:INTELX_API_KEY}
+    URLSCAN_API_KEY: ${env:URLSCAN_API_KEY}
+    SLACK_BOT_TOKEN: ${env:SLACK_BOT_TOKEN}
+    SLACK_USER_TOKEN: ${env:SLACK_USER_TOKEN}
+    TZ: Asia/Tokyo
+    stage: ${self:provider.stage}
+    region: ${self:provider.region}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action: "iam:PassRole"
+      Resource: "*"
+  apiGateway:
+    apiKeys:
+      - free: # 使用量プラン
+        - ${opt:stage, self:provider.stage}-free-key
+    usagePlan:
+      - free:
+          quota:
+            limit: 1000 # API の呼び出しを行える最大回数
+            offset: 0 # API の呼び出し回数の初期値（通常は 0 回を指定する）
+            period: DAY # DAY or WEEK or MONTH
+          throttle:
+            rateLimit: 2 # 1 秒あたりに処理できる API リクエスト数
+            burstLimit: 3 # 同時に処理できる最大リクエスト数
+
+custom:
+  apiGatewayThrottling:
+    maxRequestsPerSecond: 5
+    maxConcurrentRequests: 10
+  prune:
+    automatic: true
+    number: 3
+
+plugins:
+  - serverless-api-gateway-throttling
+  - serverless-prune-plugin
+
+functions:
+  create_notion_page:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: create_notion_page
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  open_youtube_url:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: open_youtube_url
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  open_github_url:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: open_github_url
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  open_github_repo:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: open_github_repo
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  open_slack_url:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: open_slack_url
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  open_notion_url:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: open_notion_url
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  open_url:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: open_url
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  open_slack_canvas_url:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: open_slack_canvas_url
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  google_drive_search:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: google_drive_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  slack_search:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: slack_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  notion_search:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: notion_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  github_search:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: github_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  google_search:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: google_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  get_github_discussion:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: get_github_discussion
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  fact_checker:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: fact_checker
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  intelx_search:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: intelx_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  run_linux_command:
+    memorySize: 512
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: run_linux_command
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
