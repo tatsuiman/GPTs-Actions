@@ -28,3 +28,24 @@
 - `get_github_discussion`: Github DiscussionのURLからディスカッション一覧を取得することができます。
 - `fact_checker`: GoogleのFact Check Tools APIを利用して、特定の主張やニュースの真偽を調査します。
 - `intelx_search`: Intelligence XのAPIを利用して、様々なデータソース（ウェブページ、フォーラム、ドキュメントなど）から情報を検索します。
+
+## デプロイ
+```bash
+cp env.sample .envrc
+direnv allow
+npm install -g serverless
+serverless plugin install -n serverless-api-gateway-throttling
+serverless plugin install -n serverless-prune-plugin
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+sls deploy
+```
+
+## Jupyter notebook
+```bash
+git clone https://github.com/tatsuiman/jupyter-ngrok-worker
+cd jupyter-ngrok-worker
+cp env.sample .env
+vim .env
+vim docker/nginx/nginx.conf
+docker-compose up -d --build
+```
