@@ -30,6 +30,8 @@ provider:
     URLSCAN_API_KEY: ${env:URLSCAN_API_KEY}
     SLACK_BOT_TOKEN: ${env:SLACK_BOT_TOKEN}
     SLACK_USER_TOKEN: ${env:SLACK_USER_TOKEN}
+    JUPYTER_TOKEN: ${env:JUPYTER_TOKEN}
+    JUPYTER_HOST: ${env:JUPYTER_HOST}
     TZ: Asia/Tokyo
     stage: ${self:provider.stage}
     region: ${self:provider.region}
@@ -233,9 +235,22 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
-  get_github_discussion:
+  youtube_search:
     maximumEventAge: 21600
     maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: youtube_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  get_github_discussion:
+    maximumEventAge: 21600
+   maximumRetryAttempts: 0
     image:
       name: gpts-functions
       command: app.handler
@@ -282,6 +297,32 @@ functions:
     events:
       - http:
           path: run_linux_command
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  jupyter_create_kernel:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: jupyter_create_kernel
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  jupyter_execute_code:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: jupyter_execute_code
           method: post
           cors: true
           integration: lambda-proxy

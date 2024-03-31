@@ -388,6 +388,34 @@
         }
       }
     },
+    "/youtube_search": {
+      "post": {
+        "description": "search within Youtube",
+        "operationId": "youtubeSearch",
+        "tags": [
+          "Search"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keyword": {
+                    "type": "string",
+                    "description": "Keyword using Youtube search."
+                  }
+                },
+                "required": [
+                  "keyword"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
     "/get_github_discussion": {
       "post": {
         "description": "retrieve discussion list from a Github Discussion URL",

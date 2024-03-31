@@ -1,0 +1,139 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ナレッジ管理API",
+    "description": "Retrieves current weather data for a location.",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://dxtngx3yhb.execute-api.ap-northeast-1.amazonaws.com/dev"
+    }
+  ],
+  "paths": {
+   "/open_github_repo": {
+      "post": {
+        "description": "get README and description of a Github repository",
+        "operationId": "openGithubRepo",
+        "tags": [
+          "Retrieve"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "repo_name": {
+                    "type": "string",
+                    "description": "Github repository name (e.g. tatsuiman/slack-copilot)"
+                  }
+                },
+                "required": [
+                  "repo_name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open_github_url": {
+      "post": {
+        "description": "open a specified URL and retrieve its content",
+        "operationId": "openGithubUrl",
+        "tags": [
+          "Retrieve"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "Github URL to open (PR, Issue, Code, etc.)"
+                  }
+                },
+                "required": [
+                  "url"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/github_search": {
+      "post": {
+        "description": "search within GitHub for Issues, Pull Requests, and code",
+        "operationId": "githubSearch",
+        "tags": [
+          "Search"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keyword": {
+                    "type": "string",
+                    "description": "Keywords to search for (e.g. 'openai slack')"
+                  },
+                  "lang": {
+                    "type": "string",
+                    "description": "Language (None: all languages)"
+                  },
+                  "org": {
+                    "type": "string",
+                    "description": "GitHub organization name (None: all organizations)"
+                  }
+                },
+                "required": [
+                  "keyword"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_github_discussion": {
+      "post": {
+        "description": "retrieve discussion list from a Github Discussion URL",
+        "operationId": "getGithubDiscussion",
+        "tags": [
+          "Retrieve"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "URL of the Github Discussion"
+                  }
+                },
+                "required": [
+                  "url"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
+

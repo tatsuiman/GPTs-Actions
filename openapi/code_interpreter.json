@@ -1,0 +1,92 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Code Interpreter API",
+    "description": "Execute code in a jupyter kernel",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://dxtngx3yhb.execute-api.ap-northeast-1.amazonaws.com/dev"
+    }
+  ],
+  "paths": {
+    "/jupyter_create_kernel": {
+      "post": {
+        "description": "Create a new kernel",
+        "operationId": "jupyter_create_kernel",
+        "tags": [
+          "Jupyter",
+          "Initialize"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Kernel created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "kernel_id": {
+                      "type": "string",
+                      "description": "Kernel ID"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jupyter_execute_code": {
+      "post": {
+        "description": "Execute code in a kernel",
+        "operationId": "jupyter_execute_code",
+        "tags": [
+          "Jupyter",
+          "Execute"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Code to execute"
+                  },
+                  "kernel_id": {
+                    "type": "string",
+                    "description": "Kernel ID"
+                  }
+                },
+                "required": [
+                  "code",
+                  "kernel_id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
