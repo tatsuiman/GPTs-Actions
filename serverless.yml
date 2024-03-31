@@ -250,7 +250,7 @@ functions:
           private: true
   get_github_discussion:
     maximumEventAge: 21600
-   maximumRetryAttempts: 0
+    maximumRetryAttempts: 0
     image:
       name: gpts-functions
       command: app.handler
