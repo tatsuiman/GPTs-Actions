@@ -1,6 +1,12 @@
 # 概要
 ナレッジ管理に特化したGPTsです。
 
+## Demo
+### Slack検索
+![](docs/slack.gif)
+### コードの実行
+![](docs/open-code-interpreter.gif)
+
 ## Functions
 以下はチャットボットが呼び出し可能な機能一覧です。
 独自のfunctionの実装方法は[こちら](./src/scripts/functions/README.md)
