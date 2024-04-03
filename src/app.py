@@ -57,6 +57,6 @@ def function_call(function_name, arguments):
                     "body": json.dumps({"message": str(e)}),
                 }
     return {
-        "statusCode": 200,
+        "statusCode": 404,
         "body": json.dumps({"message": "unknown actions"}),
     }

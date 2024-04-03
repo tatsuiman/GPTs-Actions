@@ -32,6 +32,7 @@ provider:
     SLACK_USER_TOKEN: ${env:SLACK_USER_TOKEN}
     JUPYTER_TOKEN: ${env:JUPYTER_TOKEN}
     JUPYTER_HOST: ${env:JUPYTER_HOST}
+    NGROK_API_KEY: ${env:NGROK_API_KEY}
     TZ: Asia/Tokyo
     stage: ${self:provider.stage}
     region: ${self:provider.region}
@@ -235,6 +236,19 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
+  trend_search:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: trend_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
   youtube_search:
     maximumEventAge: 21600
     maximumRetryAttempts: 0
@@ -323,6 +337,19 @@ functions:
     events:
       - http:
           path: jupyter_execute_code
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  jupyter_run_command:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: jupyter_run_command
           method: post
           cors: true
           integration: lambda-proxy

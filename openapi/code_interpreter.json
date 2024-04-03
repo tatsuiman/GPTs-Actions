@@ -25,7 +25,12 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                  "language": {
+                    "type": "string",
+                    "description": "Supported languages: ruby,rust,python3,java,xcpp11,xcpp17,xcpp14,tslab,jslab,gonb"
+                  }
+                },
                 "required": []
               }
             }
@@ -78,6 +83,35 @@
                 "required": [
                   "code",
                   "kernel_id"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jupyter_run_command": {
+      "post": {
+        "description": "Execute Linux command",
+        "operationId": "jupyter_run_command",
+        "tags": [
+          "Jupyter",
+          "Execute"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "Linux command to execute"
+                  }
+                },
+                "required": [
+                  "command"
                 ]
               }
             }

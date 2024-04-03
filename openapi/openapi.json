@@ -388,6 +388,36 @@
         }
       }
     },
+    "/trend_search": {
+      "post": {
+        "description": "generate trend search urls",
+        "operationId": "trendSearch",
+        "tags": [
+          "Search",
+          "Trends",
+          "SNS"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keywords": {
+                    "type": "string",
+                    "description": "Keywords combined with a comma (e.g. openai,gemini)"
+                  }
+                },
+                "required": [
+                  "keywords"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
     "/youtube_search": {
       "post": {
         "description": "search within Youtube",
@@ -465,35 +495,6 @@
                 },
                 "required": [
                   "query"
-                ]
-              }
-            }
-          }
-        }
-      }
-    },
-    "/run_linux_command": {
-      "post": {
-        "description": "run a command on a remote server",
-        "operationId": "runLinuxCommand",
-        "tags": [
-          "Run",
-          "Linux"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "cmd": {
-                    "type": "string",
-                    "description": "Command to run"
-                  }
-                },
-                "required": [
-                  "cmd"
                 ]
               }
             }

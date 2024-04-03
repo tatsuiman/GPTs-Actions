@@ -3,7 +3,6 @@ import re
 import logging
 import requests
 from bs4 import BeautifulSoup
-from tempfile import mkdtemp
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
@@ -12,82 +11,6 @@ SLACK_USER_TOKEN = os.getenv("SLACK_USER_TOKEN")
 slack_user_client = WebClient(token=SLACK_USER_TOKEN, timeout=300)
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 slack_bot_client = WebClient(token=SLACK_BOT_TOKEN, timeout=300)
-auth_response = slack_bot_client.auth_test()
-BOT_USER_ID = auth_response["user_id"]
-
-
-def get_user_id(user_id):
-    return slack_bot_client.users_info(user=user_id)
-
-
-def get_slack_file_bytes(file_url) -> bytes:
-    r = requests.get(file_url, headers={"Authorization": f"Bearer {SLACK_BOT_TOKEN}"})
-    return r.content
-
-
-def update_message(channel_id, message_ts, text="", blocks=[]):
-    response = None
-    try:
-        response = slack_bot_client.chat_update(
-            channel=channel_id, ts=message_ts, text=text, blocks=blocks
-        )
-    except SlackApiError as e:
-        logging.error(f"失敗しました: {str(e)}")
-    return response
-
-
-def upload_file(file, filename):
-    upload = slack_bot_client.files_upload(file=file, filename=filename)
-    return upload["file"]["permalink"]
-
-
-def post_message(channel_id, thread_ts, text="", files=[], blocks=[]):
-    response = None
-    try:
-        for file in files:
-            filename = os.path.basename(file)
-            permalink = upload_file(file, filename)
-            text = text + f"\n<{permalink}|{filename}>"
-        response = slack_bot_client.chat_postMessage(
-            channel=channel_id, text=text, thread_ts=thread_ts, blocks=blocks
-        )
-    except SlackApiError as e:
-        logging.error(f"失敗しました: {str(e)}")
-    return response
-
-
-def post_ephemeral(channel_id, thread_ts, user_id, text="", blocks=[]):
-    response = None
-    try:
-        response = slack_bot_client.chat_postEphemeral(
-            channel=channel_id,
-            user=user_id,
-            text=text,
-            thread_ts=thread_ts,
-            blocks=blocks,
-        )
-    except SlackApiError as e:
-        logging.error(f"失敗しました: {str(e)}")
-    return response
-
-
-def delete_message(channel_id, message_ts):
-    try:
-        response = slack_bot_client.chat_delete(channel=channel_id, ts=message_ts)
-        logging.info("Message deleted successfully.")
-    except SlackApiError as e:
-        logging.error(f"Failed to delete message: {str(e)}")
-
-
-def add_reaction(name, channel_id, message_ts):
-    try:
-        if channel_id is not None and message_ts is not None:
-            response = slack_bot_client.reactions_add(
-                name=name, channel=channel_id, timestamp=message_ts
-            )
-            logging.info(f"Added {name} reaction")
-    except SlackApiError as e:
-        logging.info(f"Failed to add {name} reaction: {str(e)}")
 
 
 def get_thread_messages(channel_id, thread_ts):
@@ -163,13 +86,3 @@ def get_canvas_content(channel_id):
     except SlackApiError as e:
         logging.info(f"Error fetching conversation info: {e}")
     return canvas_content
-
-
-def get_im_channel_id(user_id):
-    channel_id = None
-    response = slack_bot_client.conversations_list(types="im")
-    for channel in response["channels"]:
-        if channel["user"] == user_id:
-            channel_id = channel["id"]
-            break
-    return channel_id

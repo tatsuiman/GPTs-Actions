@@ -1,9 +1,22 @@
 import os
 import re
 import time
+import ngrok
 import logging
 from bs4 import BeautifulSoup
 from selenium import webdriver
+
+
+def get_ngrok_public_host():
+    ngrok_host = ""
+    # construct the api client
+    client = ngrok.Client(os.getenv("NGROK_API_KEY"))
+
+    # list all online tunnels
+    for t in client.tunnels.list():
+        if t.forwards_to == "http://nginx:80":
+            ngrok_host = t.public_url.replace("https://", "")
+    return ngrok_host
 
 
 def browser_open(url, screenshot_png=None):
