@@ -118,6 +118,40 @@
           }
         }
       }
+    },
+    "/jupyter_write_file": {
+      "post": {
+        "description": "Write file to kernel",
+        "operationId": "jupyter_write_file",
+        "tags": [
+          "Jupyter",
+          "Write"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "Content"
+                  },
+                  "file_path": {
+                    "type": "string",
+                    "description": "File path"
+                  }
+                },
+                "required": [
+                  "content",
+                  "file_path"
+                ]
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {

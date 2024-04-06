@@ -14,4 +14,5 @@ awslambdaric
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
-websocket-client
+jupyter-api-client
+arxiv

@@ -4,7 +4,7 @@ from googleapiclient.discovery import build
 
 # サービスアカウントの情報を読み込む
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
-SERVICE_ACCOUNT_FILE = "../data/service_account.json"
+SERVICE_ACCOUNT_FILE = "data/service_account.json"
 
 
 def run(keyword):

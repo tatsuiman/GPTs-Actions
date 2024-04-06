@@ -16,6 +16,7 @@
         "description": "create a page in Notion with specified title and content",
         "operationId": "createNotionPage",
         "tags": [
+          "Notion",
           "Create"
         ],
         "requestBody": {
@@ -44,12 +45,13 @@
         }
       }
     },
-    "/open_youtube_url": {
+    "/append_notion_page": {
       "post": {
-        "description": "retrieve subtitles from a Youtube URL",
-        "operationId": "getYoutubeSubtitles",
+        "description": "append content to a Notion page",
+        "operationId": "appendNotionPage",
         "tags": [
-          "Retrieve"
+          "Notion",
+          "Update"
         ],
         "requestBody": {
           "required": true,
@@ -58,13 +60,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "url": {
+                  "page_id": {
                     "type": "string",
-                    "description": "URL of the Youtube video"
+                    "description": "Notion page id"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content to append"
                   }
                 },
                 "required": [
-                  "url"
+                  "page_id",
+                  "content"
                 ]
               }
             }
@@ -411,6 +418,35 @@
                 },
                 "required": [
                   "keywords"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/arxiv_search": {
+      "post": {
+        "description": "Paper search within arXiv",
+        "operationId": "arxivSearch",
+        "tags": [
+          "Search",
+          "Paper"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "Query using arXiv search.(e.g. 'quantum' 'au:del_maestro AND ti:checkerboard')"
+                  }
+                },
+                "required": [
+                  "query"
                 ]
               }
             }

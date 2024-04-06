@@ -1,10 +1,11 @@
-import json
 import os
+import sys
 from jupyter_api import JupyterClient
 from tools import get_ngrok_public_host
+from tempfile import mkdtemp
 
 
-def run(language):
+def run(content, file_path):
     JUPYTER_HOST = (
         os.getenv("JUPYTER_HOST")
         if len(os.getenv("JUPYTER_HOST")) > 0
@@ -13,11 +14,11 @@ def run(language):
     TOKEN = os.getenv("JUPYTER_TOKEN")
     SCHEMA = os.getenv("SCHEMA", "https")
     client = JupyterClient(JUPYTER_HOST, SCHEMA, TOKEN)
-    kernel_id = client.create_kernel(language)
-    return json.dumps({"kernel_id": kernel_id})
+    temp_file_path = os.path.join(mkdtemp(), "temp.txt")
+    with open(temp_file_path, "w") as f:
+        f.write(content)
+    return client.upload_file(temp_file_path, file_path)
 
 
 if __name__ == "__main__":
-    import sys
-
-    print(run(sys.argv[1]))
+    print(run(sys.argv[1], sys.argv[2]))

@@ -1,4 +1,5 @@
 import os
+import json
 from notion.util import (
     create_notion_page,
     markdown_to_notion_blocks,
@@ -17,8 +18,9 @@ def run(title, content):
         # MarkdownをNotionブロックに変換
         blocks = markdown_to_notion_blocks(content)
         # Notionページにブロックを追加
-        append_blocks_to_page(resp["id"], blocks)
+        id = resp["id"]
         url = resp["url"]
-        return f"\nNotionページを作成しました。\n\n間違いがあれば修正し、ページは適当な場所に移動してください。\n{title}\n{url}"
+        append_blocks_to_page(id, blocks)
+        return json.dumps({"status": "success", "url": url, "page_id": id})
     except:
-        return f"\nNotionページの追加に失敗しました。{resp}"
+        return json.dumps({"status": "failed"})

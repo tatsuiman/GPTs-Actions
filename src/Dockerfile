@@ -18,7 +18,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 COPY functions /function/functions
 COPY data /function/data
 COPY entrypoint.sh /
-COPY app.py tools.py slacklib.py jupyter_client.py /function
+COPY app.py tools.py slacklib.py /function
 WORKDIR /function
 ADD https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie /usr/bin/aws-lambda-rie
 RUN chmod 755 /usr/bin/aws-lambda-rie

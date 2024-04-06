@@ -80,6 +80,19 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
+  append_notion_page:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: append_notion_page
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
   open_youtube_url:
     maximumEventAge: 21600
     maximumRetryAttempts: 0
@@ -249,6 +262,19 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
+  arxiv_search:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: arxiv_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
   youtube_search:
     maximumEventAge: 21600
     maximumRetryAttempts: 0
@@ -354,3 +380,17 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
+  jupyter_write_file:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: jupyter_write_file
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+

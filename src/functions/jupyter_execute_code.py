@@ -1,14 +1,26 @@
+import os
 import logging
-from jupyter_client import execute_code
+from jupyter_api import JupyterClient
+from tools import get_ngrok_public_host
 
 
 def run(code, kernel_id):
     try:
-        output = execute_code(code, kernel_id)
+        JUPYTER_HOST = (
+            os.getenv("JUPYTER_HOST")
+            if len(os.getenv("JUPYTER_HOST")) > 0
+            else get_ngrok_public_host()
+        )
+        TOKEN = os.getenv("JUPYTER_TOKEN")
+        SCHEMA = os.getenv("SCHEMA", "https")
+        client = JupyterClient(JUPYTER_HOST, SCHEMA, TOKEN)
+        output = client.execute_code(code, kernel_id)
         return output
     except Exception as e:
         logging.exception(e)
-        return "カーネルが起動していません。もう一度カーネルを作成してください。"
+        return (
+            f"カーネルが起動していません。もう一度カーネルを作成してください。{str(e)}"
+        )
 
 
 if __name__ == "__main__":
