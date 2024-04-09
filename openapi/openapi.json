@@ -383,7 +383,7 @@
                 "properties": {
                   "keyword": {
                     "type": "string",
-                    "description": "Keyword using Google Hacking Techniques."
+                    "description": "Keyword using Google Hacking Techniques.(e.g. 'site:twitter.com')"
                   }
                 },
                 "required": [
