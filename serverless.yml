@@ -327,20 +327,6 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
-  run_linux_command:
-    memorySize: 512
-    maximumEventAge: 21600
-    maximumRetryAttempts: 0
-    image:
-      name: gpts-functions
-      command: app.handler
-    events:
-      - http:
-          path: run_linux_command
-          method: post
-          cors: true
-          integration: lambda-proxy
-          private: true
   jupyter_create_kernel:
     maximumEventAge: 21600
     maximumRetryAttempts: 0
