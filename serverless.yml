@@ -11,6 +11,9 @@ provider:
   logRetentionInDays: 7
   timeout: 30
   memorySize: 128
+  tracing:
+    apiGateway: true
+    lambda: true
   ecr:
     images:
       gpts-functions:
