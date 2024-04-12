@@ -278,6 +278,19 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
+  location_search:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: location_search
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
   youtube_search:
     maximumEventAge: 21600
     maximumRetryAttempts: 0
