@@ -26,7 +26,7 @@ X
 
 ![](./sheet.png)
 
-2. 「拡張機能」→「Apps Script」から進んでスクリプトを設置します。
+2. 「拡張機能」→「Apps Script」から進んで[code.gs](./code.gs)と[appscript.json](./appscript.json)を設置します。
 
 ![](./addon.png)
 
