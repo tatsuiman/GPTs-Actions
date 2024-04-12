@@ -36,12 +36,13 @@ provider:
     JUPYTER_TOKEN: ${env:JUPYTER_TOKEN}
     JUPYTER_HOST: ${env:JUPYTER_HOST}
     NGROK_API_KEY: ${env:NGROK_API_KEY}
+    GAS_SPREADSHEET_ID: ${env:GAS_SPREADSHEET_ID}
     PINECONE_API_KEY: ${env:PINECONE_API_KEY}
-    TZ: Asia/Tokyo
     OPENAI_API_KEY: ${env:OPENAI_API_KEY}
     VECTOR_TABLE: ${self:service}-${opt:stage, self:provider.stage}-vector
     stage: ${self:provider.stage}
     region: ${self:provider.region}
+    TZ: Asia/Tokyo
   iamRoleStatements:
     - Effect: "Allow"
       Action: "iam:PassRole"
@@ -441,6 +442,19 @@ functions:
     events:
       - http:
           path: semantic_search_memory
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  gas_code_interpreter:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: gas_code_interpreter
           method: post
           cors: true
           integration: lambda-proxy

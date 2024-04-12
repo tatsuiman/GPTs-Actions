@@ -1,0 +1,82 @@
+{
+  "timeZone": "Asia/Tokyo",
+  "dependencies": {
+    "enabledAdvancedServices": [
+      {
+        "userSymbol": "YouTubeAnalytics",
+        "serviceId": "youtubeAnalytics",
+        "version": "v2"
+      },
+      {
+        "userSymbol": "YouTube",
+        "serviceId": "youtube",
+        "version": "v3"
+      },
+      {
+        "userSymbol": "YouTubeContentId",
+        "serviceId": "youtubePartner",
+        "version": "v1"
+      },
+      {
+        "userSymbol": "BigQuery",
+        "serviceId": "bigquery",
+        "version": "v2"
+      },
+      {
+        "userSymbol": "Tasks",
+        "serviceId": "tasks",
+        "version": "v1"
+      },
+      {
+        "userSymbol": "AnalyticsData",
+        "serviceId": "analyticsdata",
+        "version": "v1beta"
+      },
+      {
+        "userSymbol": "AnalyticsAdmin",
+        "serviceId": "analyticsadmin",
+        "version": "v1beta"
+      },
+      {
+        "userSymbol": "Analytics",
+        "serviceId": "analytics",
+        "version": "v3"
+      },
+      {
+        "userSymbol": "AnalyticsReporting",
+        "serviceId": "analyticsreporting",
+        "version": "v4"
+      }
+    ]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/presentations",
+    "https://www.googleapis.com/auth/forms",
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/script.scriptapp",
+    "https://www.googleapis.com/auth/calendar",
+    "https://www.googleapis.com/auth/youtube",
+    "https://www.googleapis.com/auth/tasks",
+    "https://www.googleapis.com/auth/documents",
+    "https://www.googleapis.com/auth/gmail.modify",
+    "https://www.googleapis.com/auth/script.send_mail",
+    "https://www.googleapis.com/auth/contacts",
+    "https://www.googleapis.com/auth/classroom.courses",
+    "https://www.googleapis.com/auth/classroom.rosters",
+    "https://www.googleapis.com/auth/classroom.coursework.students",
+    "https://www.googleapis.com/auth/photoslibrary",
+    "https://www.googleapis.com/auth/photoslibrary.sharing",
+    "https://www.googleapis.com/auth/drive.appfolder",
+    "https://www.googleapis.com/auth/drive.metadata.readonly",
+    "https://www.googleapis.com/auth/analytics",
+    "https://www.googleapis.com/auth/analytics.readonly",
+    "https://www.googleapis.com/auth/bigquery",
+    "https://www.googleapis.com/auth/devstorage.full_control",
+    "https://www.googleapis.com/auth/firebase",
+    "https://www.googleapis.com/auth/firebase.readonly"
+  ],
+  "runtimeVersion": "V8"
+}
