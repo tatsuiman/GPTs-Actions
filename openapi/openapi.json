@@ -566,6 +566,64 @@
           }
         }
       }
+    },
+    "/ingest_memory": {
+      "post": {
+        "description": "ingest memory",
+        "operationId": "ingestMemory",
+        "tags": [
+          "Ingest",
+          "Memory"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Text to ingest"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/semantic_search_memory": {
+      "post": {
+        "description": "semantic search memory",
+        "operationId": "semanticSearchMemory",
+        "tags": [
+          "Search",
+          "Memory"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "Query to semantic search"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {

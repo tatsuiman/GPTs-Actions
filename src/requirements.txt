@@ -16,3 +16,6 @@ google-auth-httplib2
 google-auth-oauthlib
 jupyter-api-client
 arxiv
+boto3
+openai
+pinecone-client

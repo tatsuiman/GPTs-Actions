@@ -36,12 +36,20 @@ provider:
     JUPYTER_TOKEN: ${env:JUPYTER_TOKEN}
     JUPYTER_HOST: ${env:JUPYTER_HOST}
     NGROK_API_KEY: ${env:NGROK_API_KEY}
+    PINECONE_API_KEY: ${env:PINECONE_API_KEY}
     TZ: Asia/Tokyo
+    OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+    VECTOR_TABLE: ${self:service}-${opt:stage, self:provider.stage}-vector
     stage: ${self:provider.stage}
     region: ${self:provider.region}
   iamRoleStatements:
     - Effect: "Allow"
       Action: "iam:PassRole"
+      Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
       Resource: "*"
   apiGateway:
     apiKeys:
@@ -56,6 +64,22 @@ provider:
           throttle:
             rateLimit: 2 # 1 秒あたりに処理できる API リクエスト数
             burstLimit: 3 # 同時に処理できる最大リクエスト数
+
+resources:
+  Resources:
+    VectorTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${opt:stage, self:provider.stage}-vector
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 
 custom:
   apiGatewayThrottling:
@@ -391,6 +415,32 @@ functions:
     events:
       - http:
           path: jupyter_write_file
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  ingest_memory:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: ingest_memory
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  semantic_search_memory:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: semantic_search_memory
           method: post
           cors: true
           integration: lambda-proxy
