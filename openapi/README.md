@@ -1,8 +1,8 @@
 # GPTs 
 
 ## アクションを追加する
-![](./actions.png)
 ![](./add_action.png)
+![](./actions.png)
 
 ## アクションの一覧
 * [All in one](https://raw.githubusercontent.com/tatsuiman/GPTs-Actions/main/openapi/openapi.json)
