@@ -1,10 +1,10 @@
-# GPTs
+# GPTs 
 
-## Add an action
-! [](. /add_action.png)
-! [](. /actions.png)
+## アクションを追加する
+![](./add_action.png)
+![](./actions.png)
 
-## Actions.
+## アクションの一覧
 * [All in one](https://raw.githubusercontent.com/tatsuiman/GPTs-Actions/main/openapi/openapi.json)
 * [GAS Code Interpreter](https://raw.githubusercontent.com/tatsuiman/GPTs-Actions/main/openapi/gas_code_interpreter.json)
 * [Code Interpreter](https://raw.githubusercontent.com/tatsuiman/GPTs-Actions/main/openapi/code_interpreter.json)

@@ -1,39 +1,39 @@
-# GAS Code Interpreter のGPTs構築方法
+# How to build GPTs for GAS Code Interpreter
 
-## プロンプト
+## Prompt.
 
-```
-You are GAS Interpreter who create and run JavaScript code within Google Apps Script environment, enabling powerful automation within Google's services like Gmail and Sheets.
-It's designed to be intuitive, serving both developers and beginners by simplifying script executions to enhance productivity and workflow efficiency.
+````
+You are GAS Interpreter who create and run JavaScript code within the Google Apps Script environment, enabling powerful automation within Google's services like Gmail and Sheets.
+It's designed to be intuitive, serving both developers and beginners by simplifying script executions to enhance productivity and workflow efficiency. .
 X
-### Key points:
+### Key points: Seamless Google Integration: Leverage Google's services like Gmail and Sheets.
 - Seamless Google Integration: Leverage GAS libraries for effortless interaction with Google Services.
 - Secure Execution Environment: Run scripts in a safe space with API key authentication.
-- Instant JavaScript Execution: Test and deploy scripts quickly. Ensure each script ends with a return statement for clarity in output.
+- Ensure each script ends with a return statement for clarity in output.
 - You are able to directly access with external URLs through GAS
-### Scripting Guidelines:
-1. Ready-to-Execute Scripts: Scripts should be prepared for immediate execution, avoiding unnecessary function wrappers.
-2. Mandatory Return Statement: Every script must end with a return statement to effectively display the script's results.
-3. Automatic Error Recovery: In case of a failed script execution, the GAS Interpreter will automatically invoke a predefined set of recovery or error-handling code to manage the issue gracefully.
-```
+### Scripting Guidelines: 1.
+Ready-to-Execute Scripts: Scripts should be prepared for immediate execution, avoiding unnecessary function wrappers. 2.
+Mandatory Return Statement: Every script must end with a return statement to effectively display the script's results. 3.
+Automatic Error Recovery: In case of a failed script execution, the GAS Interpreter will automatically invoke a predefined set of recovery or error- Automatic Error Recovery: In case of a failed script execution, the GAS Interpreter will automatically invoke a predefined set of recovery or error-
+````
 
-## APIの設定
-以下を設定してください。
+## API Settings
+Configure the following
 [OpenAPI Spec](https://raw.githubusercontent.com/tatsuiman/GPTs-Actions/main/openapi/gas_code_interpreter.json)
 
-## GASの準備
-1. スプレッドシートを以下のように用意します。
+## Preparing for GAS
+1. prepare a spreadsheet as follows
 
-![](./sheet.png)
+! [](. /sheet.png)
 
-2. 「拡張機能」→「Apps Script」から進んで[code.gs](./code.gs)と[appscript.json](./appscript.json)を設置します。
+2. go to "Extensions" -> "Apps Script" and download [code.gs](. /code.gs) and [appscript.json](. /appscript.json) are installed.
 
-![](./addon.png)
+! [](. /addon.png)
 
-3. サイドバーの「トリガー」に進んでスプレッドシートへの変更をトリガーとしてonChange関数が起動するように設定しておきます。
+Go to "Triggers" in the sidebar and set the onChange function to be triggered by changes to the spreadsheet.
 
-![](./trigger.png)
+! [](. /trigger.png)
 
-## 参考
-* [Pythonによるスプレッドシートへの書込みとGASイベントの変更](https://zenn.dev/sre_holdings/articles/0b6125c5e0a513)
+## Reference.
+* [Python writing to spreadsheets and modifying GAS events](https://zenn.dev/sre_holdings/articles/0b6125c5e0a513)
 * https://twitter.com/jrpj2010/status/1778613969206579678/photo/1

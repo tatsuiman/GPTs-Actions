@@ -1,83 +1,85 @@
-# 概要
-ナレッジ管理に特化したGPTsです。
+# Overview
+GPTs specialized in knowledge management.
+
+[日本語](./README_ja.md)
 
 ## Demo
-### GASでコードを実行
-![](docs/gas-code-interpreter.gif)
+### Execute code in GAS
+! [](docs/gas-code-interpreter.gif)
 
-[セットアップ方法](./GAS/code_interpreter/README.md)
-### Jupyterでコードを実行
-![](docs/open-code-interpreter.gif)
+[Setup Instructions](. /GAS/code_interpreter/README.md)
+### Run the code in Jupyter
+! [](docs/open-code-interpreter.gif)
 
-[セットアップ方法](https://zenn.dev/tatsui/articles/gpts-actions)
-### Slack検索
-![](docs/slack.gif)
+[how to set up](https://zenn.dev/tatsui/articles/gpts-actions)
+### Slack Search
+! [](docs/slack.gif)
 
-## 関連記事
-* [ChatGPT「Code Interpreter」でPython以外の言語を動かしたい](https://zenn.dev/tatsui/articles/local-code-interpreter)
-* [Jupyter ✖️ ChatGPT セルフホストの「Code Interpreter」を構築する](https://zenn.dev/tatsui/articles/gpts-actions)
+## Related Articles.
+* [I want to run a language other than Python on ChatGPT "Code Interpreter"](https://zenn.dev/tatsui/articles/local-code-interpreter)
+* [Jupyter ✖️ Building a ChatGPT self-hosted "Code Interpreter"](https://zenn.dev/tatsui/articles/gpts-actions)
 
 ## Functions
-以下はチャットボットが呼び出し可能な機能と必要な環境変数や認証情報の一覧です。
-独自のfunctionの実装方法は[こちら](./src/functions/README.md)
+Below is a list of functions that can be called by the chatbot, along with the necessary environment variables and authentication information.
+For details on how to implement your own functions, [click here](. /src/functions/README.md)
 
-- `jupyter_create_kernel`: リモートのJupyter Notebook のカーネルを作成する。
+- `jupyter_create_kernel`: Create a remote Jupyter Notebook kernel.
+    - `NGROK_API_KEY`.
+    - `JUPYTER_TOKEN`.
+- `jupyter_execute_code`: Execute code in the remote Jupyter Notebook.
     - `NGROK_API_KEY`
-    - `JUPYTER_TOKEN`
-- `jupyter_execute_code`: リモートのJupyter Notebook でコードを実行する。
+    - `JUPYTER_TOKEN`.
+- `jupyter_write_file`: Write a file to the remote Jupyter Notebook.
     - `NGROK_API_KEY`
-    - `JUPYTER_TOKEN`
-- `jupyter_write_file`: リモートのJupyter Notebook にファイルを書き込む
-    - `NGROK_API_KEY`
-    - `JUPYTER_TOKEN`
-- `gas_execute_code`: Google Apps Script でコードを実行します。
+    - `JUPYTER_TOKEN`.
+- `gas_execute_code`: Execute code in Google Apps Script.
     - `GAS_SPREADSHEET_ID`
-    - `src/data/service_account.json`
-- `create_notion_page`: 指定されたタイトルと内容でNotionページを作成します。
+    - `src/data/service_account.json`.
+- `create_notion_page`: Create a Notion page with the given title and content.
     - `NOTION_SECRET`
-    - `NOTION_DATABASE_ID`
-- `append_notion_page`: Notionページに内容を追加します。
-    - `NOTION_SECRET`
-    - `NOTION_DATABASE_ID`
-- `open_youtube_url`: YoutubeのURLから字幕を取得します。
-- `open_slack_url`: SlackのURLからスレッドのメッセージ一覧を取得します。
+    - `NOTION_DATABASE_ID`.
+- `append_notion_page`: Append the content to the Notion page.
+    - `NOTION_SECRET`.
+    - `NOTION_DATABASE_ID`.
+- `open_youtube_url`: retrieve subtitles from Youtube URL.
+- `open_slack_url`: retrieve the message list of a thread from a Slack URL.
+    - `SLACK_BOT_TOKEN`.
+- `open_notion_url`: retrieve the content of the page using NotionAPI.
+    - `NOTION_SECRET`.
+- `open_url`: Open the given URL and retrieve its content. Used for web page scraping and API responses.
+- `open_slack_canvas_url`: retrieve content from the slack canvas url.
+    - `SLACK_BOT_TOKEN`.
+    - `SLACK_USER_TOKEN`.
+- `google_search`: search for information from the entire web using Google's custom search engine. Returns search results based on specific keywords.
+    - `GOOGLE_CSE_ID`.
+    - `GOOGLE_API_KEY`.
+- `arxiv_search`: searches for articles using arXive.
+- `location_search`: Finds the latitude and longitude of an address based on keywords.
+- `trend_search`: Performs a Google trend search.
+- `youtube_search`: Search Youtube videos.
+- `google_drive_search`: Search for file names from Google Drive. Returns search results based on keywords.
+    - `src/data/service_account.json`.
+- `slack_search`: Search the message history of a specific channel or user using Slack's API.
     - `SLACK_BOT_TOKEN`
-- `open_notion_url`: NotionAPIを利用してしページの内容を取得します。
-    - `NOTION_SECRET`
-- `open_url`: 指定されたURLを開き、その内容を取得します。ウェブページのスクレイピングやAPIのレスポンス取得に使用されます。
-- `open_slack_canvas_url`: slack canvas urlからコンテンツを取得します。
-    - `SLACK_BOT_TOKEN`
-    - `SLACK_USER_TOKEN`
-- `google_search`: Googleのカスタム検索エンジンを利用して、ウェブ全体から情報を検索します。特定のキーワードに基づいた検索結果を返します。
-    - `GOOGLE_CSE_ID`
+    - `SLACK_USER_TOKEN`.
+- `notion_search`: Use Notion's API to search pages and databases within Notion.
+    - `NOTION_SECRET`.
+- `github_search`: Search for Issues, Pull Requests, and code in GitHub and return results.
+    - `GITHUB_TOKEN`.
+- `get_github_discussion`: allows you to retrieve a list of discussions from a Github Discussion URL.
+    - `GITHUB_TOKEN`.
+- `fact_checker`: use Google's Fact Check Tools API to investigate the veracity of a particular claim or news item.
     - `GOOGLE_API_KEY`
-- `arxiv_search`: arXiveを使って論文を検索します。
-- `location_search`: キーワードから住所の緯度経度を求めます。
-- `trend_search`: Googleトレンド検索を行います。
-- `youtube_search`: Youtubeの動画を検索します。
-- `google_drive_search`: Google Driveからファイル名を検索することができます。キーワードに基づいた検索結果を返します。
-    - `src/data/service_account.json`
-- `slack_search`: SlackのAPIを利用して、特定のチャンネルやユーザーのメッセージ履歴を検索します。
-    - `SLACK_BOT_TOKEN`
-    - `SLACK_USER_TOKEN`
-- `notion_search`: NotionのAPIを利用して、Notion内のページやデータベースを検索します。
-    - `NOTION_SECRET`
-- `github_search`: GitHub内でのIssue、Pull Request、コードの検索を行い、結果を返します。
-    - `GITHUB_TOKEN`
-- `get_github_discussion`: Github DiscussionのURLからディスカッション一覧を取得することができます。
-    - `GITHUB_TOKEN`
-- `fact_checker`: GoogleのFact Check Tools APIを利用して、特定の主張やニュースの真偽を調査します。
-    - `GOOGLE_API_KEY`
-- `intelx_search`: Intelligence XのAPIを利用して、様々なデータソース（ウェブページ、フォーラム、ドキュメントなど）から情報を検索します。
+- `intelx_search`: uses Intelligence X's API to search for information from various data sources (web pages, forums, documents, etc.).
     - `INTELX_API_KEY`
-- `ingest_memory`: 会話の重要な内容を記憶します。
-    - `PINECONE_API_KEY`
-    - `OPENAI_API_KEY`
-- `semantic_search_memory`: 会話の重要な内容を検索します。
+- `ingest_memory`: memorize important content of a conversation.
+    - `PINECONE_API_KEY`.
+    - `OPENAI_API_KEY`.
+- `semantic_search_memory`: search the semantic content of the conversation.
     - `PINECONE_API_KEY`
     - `OPENAI_API_KEY`
 
-## デプロイ
+## Deploy
 ```bash
 cp env.sample .envrc
 direnv allow
@@ -98,6 +100,6 @@ vim docker/nginx/nginx.conf
 docker-compose up -d --build
 ```
 
-## GPTsの作成
+## Create GPTs
 
-GPTsは[こちら](./openapi/README.md)を読んで設定してください。
+GPTs can be set up by reading [here](/openapi/README.md). /openapi/README.md) to set them up.
