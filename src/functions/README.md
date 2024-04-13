@@ -1,10 +1,9 @@
 # 関数
 
 Function Calling から呼び出される関数です。
-`/`コマンドで指定したアシスタントが実行可能な関数を定義できます
 
 ## サンプル
-`function/`に以下のようなpythonファイル`my_youtube_transcript.py`を作成してください
+`src/function/`に以下のようなpythonファイル`my_youtube_transcript.py`を作成してください
 ```python
 import os
 import sys
@@ -25,28 +24,24 @@ def run(url, language=["ja"]):
     return transcript_text
 ```
 
-次に`data/assistant.yml`に以下のように追記します。
+serverless.yamlに以下を追記
 ```yaml
-youtube_transcript:
-  name: Youtubeアシスタント
-  instructions: |
-    Youtube URLから字幕を生成し質問に回答するアシスタントです
-  tools:
-    - function:
-        description: Open Youtube URL
-        name: my_youtube_transcript
-        parameters:
-          properties:
-            url:
-              description: youtube url string
-              type: string
-          required:
-            - url
-          type: object
-      type: function
+  my_youtube_transcript:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: my_youtube_transcript
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
 ```
 
-再度デプロイを行うとアシスタントと関数が追加されます
+再度デプロイを行うと関数が追加されます
 ```bash
 sls deploy
 ```
