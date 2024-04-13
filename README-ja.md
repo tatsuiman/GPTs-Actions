@@ -18,7 +18,7 @@
 * [Jupyter ✖️ ChatGPT セルフホストの「Code Interpreter」を構築する](https://zenn.dev/tatsui/articles/gpts-actions)
 
 ## Functions
-以下はチャットボットが呼び出し可能な機能と必要な環境変数や認証情報の一覧です。
+以下はチャットボットが呼び出し可能な機能と必要な環境変数や認証情報の一覧です。  
 独自のfunctionの実装方法は[こちら](./src/functions/README-ja.md)
 
 - `jupyter_create_kernel`: リモートのJupyter Notebook のカーネルを作成する。

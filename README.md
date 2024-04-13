@@ -8,7 +8,7 @@ GPTs specialized in knowledge management.
 ### Execute code in GAS
 ![](docs/gas-code-interpreter.gif)
 
-[Setup Instructions](. /GAS/code_interpreter/README.md)
+[Setup Instructions](./GAS/code_interpreter/README.md)
 ### Run the code in Jupyter
 ![](docs/open-code-interpreter.gif)
 
@@ -21,8 +21,8 @@ GPTs specialized in knowledge management.
 * [Jupyter ✖️ Building a ChatGPT self-hosted "Code Interpreter"](https://zenn.dev/tatsui/articles/gpts-actions)
 
 ## Functions
-Below is a list of functions that can be called by the chatbot, along with the necessary environment variables and authentication information.
-For details on how to implement your own functions, [click here](. /src/functions/README.md)
+Below is a list of functions that can be called by the chatbot, along with the necessary environment variables and authentication information.  
+For details on how to implement your own functions, [click here](./src/functions/README.md)
 
 - `jupyter_create_kernel`: Create a remote Jupyter Notebook kernel.
     - `NGROK_API_KEY`.

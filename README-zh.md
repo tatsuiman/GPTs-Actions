@@ -20,7 +20,7 @@ GPT 专门从事知识管理。
 * [Jupyter ✖️ 构建 ChatGPT 自托管 "代码解释器"](https://zenn.dev/tatsui/articles/gpts-actions)
 
 ### 功能
-下面列出了聊天机器人可以调用的函数，以及必要的环境变量和身份验证信息。
+下面列出了聊天机器人可以调用的函数，以及必要的环境变量和身份验证信息。  
 有关如何实现自己的函数的详细信息，请 [单击此处](./src/functions/README-zh.md)
 
 - jupyter_create_kernel`：创建远程 Jupyter Notebook 内核。
