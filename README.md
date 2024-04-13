@@ -2,6 +2,7 @@
 GPTs specialized in knowledge management.
 
 [日本語](./README_ja.md)
+[中文](./README_zh.md)
 
 ## Demo
 ### Execute code in GAS
