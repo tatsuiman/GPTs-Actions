@@ -102,4 +102,4 @@ docker-compose up -d --build
 
 ## Create GPTs
 
-GPTs can be set up by reading [here](/openapi/README.md). /openapi/README.md) to set them up.
+GPTs can be set up by reading [here](/openapi/README.md) to set them up.
