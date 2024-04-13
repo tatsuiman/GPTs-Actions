@@ -15,6 +15,7 @@
       "post": {
         "description": "search for location x,y,z",
         "operationId": "locationSearch",
+        "x-openai-isConsequential": false,
         "tags": [
           "Search"
         ],

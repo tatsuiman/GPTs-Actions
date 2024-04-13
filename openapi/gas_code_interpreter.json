@@ -15,6 +15,7 @@
       "post": {
         "description": "Execute code in a Google Apps Script",
         "operationId": "gas_code_interpreter",
+        "x-openai-isConsequential": false,
         "tags": [
           "Google Apps Script",
           "Execute"

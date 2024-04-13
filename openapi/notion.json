@@ -15,6 +15,7 @@
       "post": {
         "description": "create a page in Notion with specified title and content",
         "operationId": "createNotionPage",
+        "x-openai-isConsequential": false,
         "tags": [
           "Create"
         ],
@@ -48,6 +49,7 @@
       "post": {
         "description": "search within Notion pages and databases",
         "operationId": "notionSearch",
+        "x-openai-isConsequential": false,
         "tags": [
           "Search"
         ],
@@ -76,6 +78,7 @@
       "post": {
         "description": "retrieve content from a Notion page using NotionAPI",
         "operationId": "getNotionContent",
+        "x-openai-isConsequential": false,
         "tags": [
           "Retrieve"
         ],

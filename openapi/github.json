@@ -71,6 +71,7 @@
       "post": {
         "description": "retrieve trending repositories from Github",
         "operationId": "githubTrending",
+        "x-openai-isConsequential": false,
         "tags": [
           "Retrieve",
           "Trending"
@@ -105,6 +106,7 @@
       "post": {
         "description": "search within GitHub for Issues, Pull Requests, and code",
         "operationId": "githubSearch",
+        "x-openai-isConsequential": false,
         "tags": [
           "Search"
         ],
@@ -141,6 +143,7 @@
       "post": {
         "description": "retrieve discussion list from a Github Discussion URL",
         "operationId": "getGithubDiscussion",
+        "x-openai-isConsequential": false,
         "tags": [
           "Retrieve"
         ],

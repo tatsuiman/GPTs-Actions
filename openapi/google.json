@@ -15,6 +15,7 @@
       "post": {
         "description": "search within Google",
         "operationId": "googleSearch",
+        "x-openai-isConsequential": false,
         "tags": [
           "Search"
         ],
