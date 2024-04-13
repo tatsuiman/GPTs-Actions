@@ -7,7 +7,7 @@ GPT 专门从事知识管理。
 ### 在 GAS 中执行代码
 ![](docs/gas-code-interpreter.gif)
 
-[设置说明](. /GAS/code_interpreter/README-zh.md)
+[设置说明](./GAS/code_interpreter/README-zh.md)
 ### 在 Jupyter 中运行代码
 ![](docs/open-code-interpreter.gif)
 
@@ -21,7 +21,7 @@ GPT 专门从事知识管理。
 
 ### 功能
 下面列出了聊天机器人可以调用的函数，以及必要的环境变量和身份验证信息。
-有关如何实现自己的函数的详细信息，请 [单击此处]（. /src/functions/README-zh.md）
+有关如何实现自己的函数的详细信息，请 [单击此处](./src/functions/README-zh.md)
 
 - jupyter_create_kernel`：创建远程 Jupyter Notebook 内核。
     - `ngrok_api_key`.
@@ -102,4 +102,4 @@ docker-compose up -d --build
 
 ## 创建 GPT
 
-可以通过阅读[此处]（/openapi/README-zh.md）来设置 GPT。
+可以通过阅读[此处](./openapi/README-zh.md)来设置 GPT。
