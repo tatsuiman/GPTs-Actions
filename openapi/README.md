@@ -1,8 +1,8 @@
 # GPTs
 
 ## Add an action
-! [](. /add_action.png)
-! [](. /actions.png)
+![](./add_action.png)
+![](./actions.png)
 
 ## Actions.
 * [All in one](https://raw.githubusercontent.com/tatsuiman/GPTs-Actions/main/openapi/openapi.json)

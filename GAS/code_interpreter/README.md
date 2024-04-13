@@ -24,15 +24,15 @@ Configure the following
 ## Preparing for GAS
 1. prepare a spreadsheet as follows
 
-! [](. /sheet.png)
+![](./sheet.png)
 
 2. go to "Extensions" -> "Apps Script" and download [code.gs](. /code.gs) and [appscript.json](. /appscript.json) are installed.
 
-! [](. /addon.png)
+![](./addon.png)
 
 Go to "Triggers" in the sidebar and set the onChange function to be triggered by changes to the spreadsheet.
 
-! [](. /trigger.png)
+![](./trigger.png)
 
 ## Reference.
 * [Python writing to spreadsheets and modifying GAS events](https://zenn.dev/sre_holdings/articles/0b6125c5e0a513)

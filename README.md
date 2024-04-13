@@ -5,15 +5,15 @@ GPTs specialized in knowledge management.
 
 ## Demo
 ### Execute code in GAS
-! [](docs/gas-code-interpreter.gif)
+![](docs/gas-code-interpreter.gif)
 
 [Setup Instructions](. /GAS/code_interpreter/README.md)
 ### Run the code in Jupyter
-! [](docs/open-code-interpreter.gif)
+![](docs/open-code-interpreter.gif)
 
 [how to set up](https://zenn.dev/tatsui/articles/gpts-actions)
 ### Slack Search
-! [](docs/slack.gif)
+![](docs/slack.gif)
 
 ## Related Articles.
 * [I want to run a language other than Python on ChatGPT "Code Interpreter"](https://zenn.dev/tatsui/articles/local-code-interpreter)
