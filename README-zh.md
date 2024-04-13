@@ -82,15 +82,15 @@ GPT 专门从事知识管理。
 ## 部署
 ```bash
 cp env.sample .envrc
-允许
+direnv allow
 npm install -g serverless
-无服务器插件安装 -n serverless-api-gateway-throttling
-无服务器插件 install -n serverless-prune-plugin
+serverless plugin install -n serverless-api-gateway-throttling
+serverless plugin install -n serverless-prune-plugin
 aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
-sls 部署
+sls deploy
 ```
 
-## Jupyter 笔记本
+## Jupyter notebook
 ```bash
 git clone https://github.com/tatsuiman/jupyter-ngrok-worker
 cd jupyter-ngrok-worker
