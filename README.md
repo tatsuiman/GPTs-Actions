@@ -1,8 +1,8 @@
 # Overview
 GPTs specialized in knowledge management.
 
-[日本語](./README_ja.md)
-[中文](./README_zh.md)
+[日本語](./README-ja.md)
+[中文](./README-zh.md)
 
 ## Demo
 ### Execute code in GAS
