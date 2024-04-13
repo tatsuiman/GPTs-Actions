@@ -97,3 +97,7 @@ vim .env
 vim docker/nginx/nginx.conf
 docker-compose up -d --build
 ```
+
+## GPTsの作成
+
+GPTsは[こちら](./openapi/README.md)を読んで設定してください。
