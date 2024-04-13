@@ -263,6 +263,19 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
+  github_trending:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: github_trending
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
   google_search:
     maximumEventAge: 21600
     maximumRetryAttempts: 0

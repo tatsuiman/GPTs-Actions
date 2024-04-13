@@ -10,6 +10,7 @@ youtube-transcript-api
 functions-framework
 sentry-sdk
 beautifulsoup4
+lxml
 awslambdaric
 google-api-python-client
 google-auth-httplib2

@@ -67,6 +67,40 @@
         }
       }
     },
+    "/github_trending": {
+      "post": {
+        "description": "retrieve trending repositories from Github",
+        "operationId": "githubTrending",
+        "tags": [
+          "Retrieve",
+          "Trending"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string",
+                    "description": "Language ('': all languages)"
+                  },
+                  "since": {
+                    "type": "string",
+                    "description": "Since (daily, weekly, monthly)"
+                  }
+                },
+                "required": [
+                  "language",
+                  "since"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
     "/github_search": {
       "post": {
         "description": "search within GitHub for Issues, Pull Requests, and code",
