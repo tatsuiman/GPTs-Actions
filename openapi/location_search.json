@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://dxtngx3yhb.execute-api.ap-northeast-1.amazonaws.com/dev"
+      "url": "https://xxxxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev"
     }
   ],
   "paths": {
