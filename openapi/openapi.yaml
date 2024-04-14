@@ -427,5 +427,26 @@ paths:
                   description: Query to semantic search
               required:
                 - query
+  /convert_mermaid_to_imgur:
+    post:
+      description: convert mermaid to imgur
+      operationId: convertMermaidToImgur
+      x-openai-isConsequential: false
+      tags:
+        - Convert
+        - Mermaid
+        - Imgur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                script:
+                  type: string
+                  description: Mermaid script
+              required:
+                - script
 components:
   schemas: {}

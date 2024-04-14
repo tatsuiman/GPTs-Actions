@@ -487,4 +487,18 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
+  convert_mermaid_to_imgur:
+    memorySize: 2048
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: convert_mermaid_to_imgur
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
 

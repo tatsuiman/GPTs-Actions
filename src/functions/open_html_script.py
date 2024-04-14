@@ -1,5 +1,6 @@
 import re
 import os
+import json
 import requests
 from tempfile import mkdtemp
 from tools import browser_open
@@ -27,4 +28,4 @@ def run(script):
         "image": (open(png_file, "rb")),
     }
     r = requests.post("https://api.imgur.com/3/upload", headers=headers, files=files)
-    return r.json()["data"]["link"]
+    return json.dumps({"imgur_url": f"![[{r.json()['data']['link']}]]"})
