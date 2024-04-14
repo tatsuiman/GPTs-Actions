@@ -1,0 +1,67 @@
+openapi: 3.1.0
+info:
+  title: ナレッジ管理API
+  description: Retrieves current weather data for a location.
+  version: v1.0.0
+servers:
+  - url: https://xxxxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev
+paths:
+  /open_slack_url:
+    post:
+      description: retrieve message list from a Slack URL
+      operationId: getSlackMessages
+      x-openai-isConsequential: false
+      tags:
+        - Retrieve
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: URL of the Slack thread
+              required:
+                - url
+  /open_slack_canvas_url:
+    post:
+      description: retrieve content from a slack canvas URL
+      operationId: getSlackCanvasContent
+      x-openai-isConsequential: false
+      tags:
+        - Retrieve
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: slack canvas URL
+              required:
+                - url
+  /slack_search:
+    post:
+      description: search message history in Slack
+      operationId: slackSearch
+      x-openai-isConsequential: false
+      tags:
+        - Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keyword:
+                  type: string
+                  description: Keywords or phrases to search for
+              required:
+                - keyword
+components:
+  schemas: {}

@@ -1,0 +1,128 @@
+openapi: 3.1.0
+info:
+  title: Code Interpreter API
+  description: Execute code in a jupyter kernel
+  version: v1.0.0
+servers:
+  - url: https://xxxxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev
+paths:
+  /open_html_script:
+    post:
+      description: Open HTML script. Return image URL
+      operationId: open_html_script
+      x-openai-isConsequential: false
+      tags:
+        - HTML
+        - Open
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                script:
+                  type: string
+                  description: HTML script
+              required:
+                - script
+  /jupyter_create_kernel:
+    post:
+      description: Create a new kernel
+      operationId: jupyter_create_kernel
+      x-openai-isConsequential: false
+      tags:
+        - Jupyter
+        - Initialize
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language:
+                  type: string
+                  description: 'Supported languages: ruby,rust,python3,java,xcpp11,xcpp17,xcpp14,tslab,jslab,gonb'
+              required: []
+      responses:
+        "200":
+          description: Kernel created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kernel_id:
+                    type: string
+                    description: Kernel ID
+  /jupyter_execute_code:
+    post:
+      description: Execute code in a kernel
+      operationId: jupyter_execute_code
+      x-openai-isConsequential: false
+      tags:
+        - Jupyter
+        - Execute
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: Code to execute
+                kernel_id:
+                  type: string
+                  description: Kernel ID
+              required:
+                - code
+                - kernel_id
+  /jupyter_run_command:
+    post:
+      description: Execute Linux command
+      operationId: jupyter_run_command
+      tags:
+        - Jupyter
+        - Execute
+      x-openai-isConsequential: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                  description: Linux command to execute
+              required:
+                - command
+  /jupyter_write_file:
+    post:
+      description: Write file to kernel
+      operationId: jupyter_write_file
+      x-openai-isConsequential: false
+      tags:
+        - Jupyter
+        - Write
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: Content
+                file_path:
+                  type: string
+                  description: File path
+              required:
+                - content
+                - file_path
+components:
+  schemas: {}

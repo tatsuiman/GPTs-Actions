@@ -1,0 +1,71 @@
+openapi: 3.1.0
+info:
+  title: ナレッジ管理API
+  description: Retrieves current weather data for a location.
+  version: v1.0.0
+servers:
+  - url: https://xxxxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev
+paths:
+  /create_notion_page:
+    post:
+      description: create a page in Notion with specified title and content
+      operationId: createNotionPage
+      x-openai-isConsequential: false
+      tags:
+        - Create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Title of the page
+                content:
+                  type: string
+                  description: Content of the page
+              required:
+                - title
+                - content
+  /notion_search:
+    post:
+      description: search within Notion pages and databases
+      operationId: notionSearch
+      x-openai-isConsequential: false
+      tags:
+        - Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keyword:
+                  type: string
+                  description: Keywords to search for
+              required:
+                - keyword
+  /open_notion_url:
+    post:
+      description: retrieve content from a Notion page using NotionAPI
+      operationId: getNotionContent
+      x-openai-isConsequential: false
+      tags:
+        - Retrieve
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: URL of the Notion page
+              required:
+                - url
+components:
+  schemas: {}

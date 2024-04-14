@@ -38,6 +38,7 @@ provider:
     GAS_SPREADSHEET_ID: ${env:GAS_SPREADSHEET_ID}
     PINECONE_API_KEY: ${env:PINECONE_API_KEY}
     OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+    IMGUR_CLIENT_ID: ${env:IMGUR_CLIENT_ID}
     VECTOR_TABLE: ${self:service}-${opt:stage, self:provider.stage}-vector
     stage: ${self:provider.stage}
     region: ${self:provider.region}
@@ -186,6 +187,7 @@ functions:
           integration: lambda-proxy
           private: true
   open_url:
+    memorySize: 2048
     maximumEventAge: 21600
     maximumRetryAttempts: 0
     image:
@@ -467,6 +469,20 @@ functions:
     events:
       - http:
           path: gas_code_interpreter
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
+  open_html_script:
+    memorySize: 2048
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: open_html_script
           method: post
           cors: true
           integration: lambda-proxy

@@ -1,0 +1,29 @@
+openapi: 3.1.0
+info:
+  title: Google検索 API
+  description: ""
+  version: v1.0.0
+servers:
+  - url: https://xxxxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev
+paths:
+  /google_search:
+    post:
+      description: search within Google
+      operationId: googleSearch
+      x-openai-isConsequential: false
+      tags:
+        - Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keyword:
+                  type: string
+                  description: Keyword using Google Hacking Techniques.(e.g. 'site:twitter.com')
+              required:
+                - keyword
+components:
+  schemas: {}

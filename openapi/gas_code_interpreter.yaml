@@ -1,0 +1,34 @@
+openapi: 3.1.0
+info:
+  title: GAS Code Interpreter API
+  description: Execute code in a Google Apps Script
+  version: v1.0.0
+servers:
+  - url: https://xxxxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev
+paths:
+  /gas_code_interpreter:
+    post:
+      description: Execute code in a Google Apps Script
+      operationId: gas_code_interpreter
+      x-openai-isConsequential: false
+      tags:
+        - Google Apps Script
+        - Execute
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Title
+                code:
+                  type: string
+                  description: Code to execute
+              required:
+                - title
+                - code
+components:
+  schemas: {}
