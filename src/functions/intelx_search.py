@@ -5,17 +5,20 @@ import json
 import logging
 import requests
 
-INTELX_API_KEY = os.getenv("INTELX_API_KEY")  # 環境変数からAPIキーを取得
 INTELX_API_URL = os.getenv("INTELX_API_URL", "https://2.intelx.io")  # IntelxのAPI URL
 
 
 class intelx:
     API_ROOT = INTELX_API_URL
-    API_KEY = INTELX_API_KEY
     USER_AGENT = ""
 
     # The API key must be always supplied
-    def __init__(self, key=INTELX_API_KEY, api_root=INTELX_API_URL, ua="IX-Python/0.5"):
+    def __init__(
+        self,
+        key=os.getenv("INTELX_API_KEY"),
+        api_root=INTELX_API_URL,
+        ua="IX-Python/0.5",
+    ):
         """
         Initialize API by setting the API key.
         """
@@ -648,12 +651,12 @@ class intelx:
         return r.json()["selectors"]
 
 
-def run(keyword: str) -> str:
-    if INTELX_API_KEY is None:
+def run(keyword: str, intelx_api_key: str) -> str:
+    if intelx_api_key is None:
         return "IntelligenceX API Key is not set"
 
     resp = ""
-    ix = intelx()
+    ix = intelx(intelx_api_key)
     result = ix.search(
         keyword,
         maxresults=10,

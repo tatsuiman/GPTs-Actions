@@ -10,7 +10,7 @@ provider:
   stage: ${opt:stage, 'dev'}
   logRetentionInDays: 7
   timeout: 30
-  memorySize: 128
+  memorySize: 254
   tracing:
     apiGateway: true
     lambda: true
@@ -24,21 +24,11 @@ provider:
   environment:
     LOG_LEVEL: 'info'
     SENTRY_DSN: ${env:SENTRY_DSN}
-    NOTION_SECRET: ${env:NOTION_SECRET}
-    NOTION_DATABASE_ID: ${env:NOTION_DATABASE_ID}
-    GITHUB_TOKEN: ${env:GITHUB_TOKEN}
     GOOGLE_CSE_ID: ${env:GOOGLE_CSE_ID}
     GOOGLE_API_KEY: ${env:GOOGLE_API_KEY}
-    INTELX_API_KEY: ${env:INTELX_API_KEY}
-    SLACK_BOT_TOKEN: ${env:SLACK_BOT_TOKEN}
-    SLACK_USER_TOKEN: ${env:SLACK_USER_TOKEN}
-    JUPYTER_TOKEN: ${env:JUPYTER_TOKEN}
-    JUPYTER_HOST: ${env:JUPYTER_HOST}
-    NGROK_API_KEY: ${env:NGROK_API_KEY}
     GAS_SPREADSHEET_ID: ${env:GAS_SPREADSHEET_ID}
     PINECONE_API_KEY: ${env:PINECONE_API_KEY}
     OPENAI_API_KEY: ${env:OPENAI_API_KEY}
-    IMGUR_CLIENT_ID: ${env:IMGUR_CLIENT_ID}
     VECTOR_TABLE: ${self:service}-${opt:stage, self:provider.stage}-vector
     stage: ${self:provider.stage}
     region: ${self:provider.region}
@@ -147,6 +137,19 @@ functions:
           cors: true
           integration: lambda-proxy
           private: true
+  github_fetch_pull_requests:
+    maximumEventAge: 21600
+    maximumRetryAttempts: 0
+    image:
+      name: gpts-functions
+      command: app.handler
+    events:
+      - http:
+          path: github_fetch_pull_requests
+          method: post
+          cors: true
+          integration: lambda-proxy
+          private: true
   open_github_repo:
     maximumEventAge: 21600
     maximumRetryAttempts: 0
@@ -227,6 +230,7 @@ functions:
           integration: lambda-proxy
           private: true
   slack_search:
+    memorySize: 1024
     maximumEventAge: 21600
     maximumRetryAttempts: 0
     image:
@@ -240,6 +244,7 @@ functions:
           integration: lambda-proxy
           private: true
   notion_search:
+    memorySize: 1024
     maximumEventAge: 21600
     maximumRetryAttempts: 0
     image:
@@ -253,6 +258,7 @@ functions:
           integration: lambda-proxy
           private: true
   github_search:
+    memorySize: 1024
     maximumEventAge: 21600
     maximumRetryAttempts: 0
     image:

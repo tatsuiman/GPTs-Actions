@@ -1,19 +1,14 @@
 import os
 import json
-from notion.util import (
-    markdown_to_notion_blocks,
-    append_blocks_to_page,
-)
-
-# NotionデータベースID
-DATABASE_ID = os.getenv("DATABASE_ID")
+from notion.util import Notion, markdown_to_notion_blocks
 
 
-def run(page_id, content):
+def run(page_id, content, notion_secret):
     try:
         # MarkdownをNotionブロックに変換
+        notion = Notion(notion_secret)
         blocks = markdown_to_notion_blocks(content)
-        append_blocks_to_page(page_id, blocks)
+        notion.append_blocks_to_page(page_id, blocks)
         return json.dumps({"status": "success"})
     except:
         return json.dumps({"status": "failed"})

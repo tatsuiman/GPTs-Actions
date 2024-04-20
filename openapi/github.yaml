@@ -10,6 +10,7 @@ paths:
     post:
       description: get README and description of a Github repository
       operationId: openGithubRepo
+      x-openai-isConsequential: false
       tags:
         - Retrieve
       requestBody:
@@ -22,12 +23,44 @@ paths:
                 repo_name:
                   type: string
                   description: Github repository name (e.g. tatsuiman/slack-copilot)
+                github_token:
+                  type: string
+                  description: "GITHUB_TOKEN=xxxxx"
               required:
                 - repo_name
+                - github_token
+  /github_fetch_pull_requests:
+    post:
+      description: fetch pull requests from a Github repository
+      operationId: githubFetchPullRequests
+      x-openai-isConsequential: false
+      tags:
+        - Retrieve
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                repo_name:
+                  type: string
+                  description: Github repository name (e.g. tatsuiman/slack-copilot)
+                github_token:
+                  type: string
+                  description: "GITHUB_TOKEN=xxxxx"
+                status:
+                  type: string
+                  description: "Status of the pull request (open, closed)"
+                  default: open
+              required:
+                - repo_name
+                - github_token
   /open_github_url:
     post:
       description: open a specified URL and retrieve its content
       operationId: openGithubUrl
+      x-openai-isConsequential: false
       tags:
         - Retrieve
       requestBody:
@@ -40,8 +73,12 @@ paths:
                 url:
                   type: string
                   description: Github URL to open (PR, Issue, Code, etc.)
+                github_token:
+                  type: string
+                  description: "GITHUB_TOKEN=xxxxx"
               required:
                 - url
+                - github_token
   /github_trending:
     post:
       description: retrieve trending repositories from Github
@@ -83,6 +120,9 @@ paths:
                 keyword:
                   type: string
                   description: Keywords to search for (e.g. 'openai slack')
+                github_token:
+                  type: string
+                  description: "GITHUB_TOKEN=xxxxx"
                 lang:
                   type: string
                   description: 'Language (None: all languages)'
@@ -91,6 +131,7 @@ paths:
                   description: 'GitHub organization name (None: all organizations)'
               required:
                 - keyword
+                - github_token
   /get_github_discussion:
     post:
       description: retrieve discussion list from a Github Discussion URL
@@ -108,7 +149,11 @@ paths:
                 url:
                   type: string
                   description: URL of the Github Discussion
+                github_token:
+                  type: string
+                  description: "GITHUB_TOKEN=xxxxx"
               required:
                 - url
+                - github_token
 components:
   schemas: {}

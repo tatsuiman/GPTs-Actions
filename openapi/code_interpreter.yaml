@@ -24,8 +24,12 @@ paths:
                 script:
                   type: string
                   description: HTML script
+                imgur_client_id:
+                  type: string
+                  description: "IMGUR_CLIENT_ID=xxxxxxx"
               required:
                 - script
+                - imgur_client_id
   /jupyter_create_kernel:
     post:
       description: Create a new kernel
@@ -43,8 +47,17 @@ paths:
               properties:
                 language:
                   type: string
-                  description: 'Supported languages: ruby,rust,python3,java,xcpp11,xcpp17,xcpp14,tslab,jslab,gonb'
-              required: []
+                  description: 'Supported languages: ruby,rust,python3,java,xcpp111,xcpp17,xcpp14,tslab,jslab,gonb'
+                jupyter_token:
+                  type: string
+                  description: "JUPYTER_TOKEN=xxxx"
+                ngrok_api_key:
+                  type: string
+                  description: "NGROK_API_KEY=xxxx"
+              required:
+                - language
+                - jupyter_token
+                - ngrok_api_key
       responses:
         "200":
           description: Kernel created successfully
@@ -77,9 +90,17 @@ paths:
                 kernel_id:
                   type: string
                   description: Kernel ID
+                jupyter_token:
+                  type: string
+                  description: "JUPYTER_TOKEN=xxxx"
+                ngrok_api_key:
+                  type: string
+                  description: "NGROK_API_KEY=xxxx"
               required:
                 - code
                 - kernel_id
+                - jupyter_token
+                - ngrok_api_key
   /jupyter_run_command:
     post:
       description: Execute Linux command
@@ -98,8 +119,16 @@ paths:
                 command:
                   type: string
                   description: Linux command to execute
+                jupyter_token:
+                  type: string
+                  description: "JUPYTER_TOKEN=xxxx"
+                ngrok_api_key:
+                  type: string
+                  description: "NGROK_API_KEY=xxxx"
               required:
                 - command
+                - jupyter_token
+                - ngrok_api_key
   /jupyter_write_file:
     post:
       description: Write file to kernel
@@ -121,8 +150,16 @@ paths:
                 file_path:
                   type: string
                   description: File path
+                jupyter_token:
+                  type: string
+                  description: "JUPYTER_TOKEN=xxxx"
+                ngrok_api_key:
+                  type: string
+                  description: "NGROK_API_KEY=xxxx"
               required:
                 - content
                 - file_path
+                - jupyter_token
+                - ngrok_api_key
 components:
   schemas: {}

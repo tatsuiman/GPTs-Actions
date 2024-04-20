@@ -1,22 +1,21 @@
 import os
 import json
 import logging
-from notion.util import get_page_markdown
+from notion.util import Notion
 from notion_client import Client
 
 
-NOTION_SECRET = os.getenv("NOTION_SECRET")
-
-
-def run(keyword: str) -> str:
+def run(keyword: str, notion_secret: str) -> str:
     """Notionのページを検索し、その内容を返します。キーワードを入力してください。"""
 
     try:
-        notion = Client(auth=NOTION_SECRET)
+        notion_util = Notion(notion_secret)
+        notion_client = Client(auth=notion_secret)
         # キーワードからページのURLを検索
-        search_results = notion.search(
+        search_results = notion_client.search(
             query=keyword,
             sort={"direction": "descending", "timestamp": "last_edited_time"},
+            page_size=5,
         )
         if not search_results["results"]:
             return "Notionの検索結果は何も見つかりませんでした。"
@@ -30,7 +29,7 @@ def run(keyword: str) -> str:
                 page_url = result["url"]
                 logging.info(f"ページURL: {page_url}")
                 # ページの内容を取得
-                page_content = get_page_markdown(page_url, recursive=False)
+                page_content = notion_util.get_page_markdown(page_url, recursive=False)
                 # レスポンスの作成
                 res += f"# {page_url}の内容\n{page_content}\n"
             except Exception as e:

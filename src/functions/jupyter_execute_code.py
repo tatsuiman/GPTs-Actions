@@ -4,16 +4,20 @@ from jupyter_api import JupyterClient
 from tools import get_ngrok_public_host
 
 
-def run(code, kernel_id):
+def run(
+    code,
+    kernel_id,
+    jupyter_token=os.getenv("JUPYTER_TOKEN"),
+    ngrok_api_key=os.getenv("NGROK_API_KEY"),
+):
     try:
         JUPYTER_HOST = (
             os.getenv("JUPYTER_HOST")
-            if len(os.getenv("JUPYTER_HOST")) > 0
-            else get_ngrok_public_host()
+            if len(os.getenv("JUPYTER_HOST", "")) > 0
+            else get_ngrok_public_host(ngrok_api_key)
         )
-        TOKEN = os.getenv("JUPYTER_TOKEN")
         SCHEMA = os.getenv("SCHEMA", "https")
-        client = JupyterClient(JUPYTER_HOST, SCHEMA, TOKEN)
+        client = JupyterClient(JUPYTER_HOST, SCHEMA, jupyter_token)
         output = client.execute_code(code, kernel_id)
         return output
     except Exception as e:

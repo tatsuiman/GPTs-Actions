@@ -2,11 +2,9 @@ import os
 import logging
 from github import Github, GithubException
 
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
-
-def run(keyword: str, lang: str = None, org: str = None) -> str:
-    g = Github(GITHUB_TOKEN)
+def run(keyword: str, github_token: str, lang: str = None, org: str = None) -> str:
+    g = Github(github_token)
     try:
         # IssueやPRとソースコードを検索
         if org is not None:

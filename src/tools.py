@@ -7,10 +7,12 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 
-def get_ngrok_public_host():
+def get_ngrok_public_host(ngrok_api_key):
     ngrok_host = ""
+    if ngrok_api_key is None:
+        return ngrok_host
     # construct the api client
-    client = ngrok.Client(os.getenv("NGROK_API_KEY"))
+    client = ngrok.Client(ngrok_api_key)
 
     # list all online tunnels
     for t in client.tunnels.list():
