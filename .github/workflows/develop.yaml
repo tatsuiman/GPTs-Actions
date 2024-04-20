@@ -1,4 +1,4 @@
-name: Deploy to AWS Lambda
+name: Deploy to AWS Lambda - Development Environment
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - develop
     paths:
       - 'src/**'
+      - '.github/workflows/develop.yaml'
   workflow_dispatch:
 
 jobs:
