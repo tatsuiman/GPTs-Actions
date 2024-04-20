@@ -23,7 +23,15 @@ paths:
                 keyword:
                   type: string
                   description: Keyword using Google Hacking Techniques.(e.g. 'site:twitter.com')
+                google_api_key:
+                  type: string
+                  description: "GOOGLE_API_KEY=xxxxxxxxx"
+                google_cse_id:
+                  type: string
+                  description: "GOOGLE_CSE_ID=xxxxxxxxxxx"
               required:
                 - keyword
+                - google_api_key
+                - google_cse_id
 components:
   schemas: {}

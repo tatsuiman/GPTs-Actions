@@ -4,16 +4,18 @@ import json
 from openai import OpenAI
 from pinecone import Pinecone
 
-# クライアントの初期化
-pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 VECTOR_TABLE = os.getenv("VECTOR_TABLE")
 
 embedding_model = "text-embedding-3-small"
 index_name = "semantic-search-openai"
 
-def run(query):
+
+def run(query, pinecone_api_key, openai_api_key):
     result = []
+    # クライアントの初期化
+    pc = Pinecone(api_key=pinecone_api_key)
+    client = OpenAI(api_key=openai_api_key)
+    # dynamodb client
     dynamodb = boto3.resource("dynamodb")
     table = dynamodb.Table(VECTOR_TABLE)
     # 質問内容をベクトル化

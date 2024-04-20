@@ -5,15 +5,17 @@ import boto3
 from openai import OpenAI
 from pinecone import Pinecone, PodSpec
 
-# クライアントの初期化
-pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 VECTOR_TABLE = os.getenv("VECTOR_TABLE")
 
 embedding_model = "text-embedding-3-small"
 index_name = "semantic-search-openai"
 
-def run(text):
+
+def run(text, pinecone_api_key, openai_api_key):
+    # クライアントの初期化
+    pc = Pinecone(api_key=pinecone_api_key)
+    client = OpenAI(api_key=openai_api_key)
     dynamodb = boto3.resource("dynamodb")
     table = dynamodb.Table(VECTOR_TABLE)
     # Pineconeのインデックスを確認する

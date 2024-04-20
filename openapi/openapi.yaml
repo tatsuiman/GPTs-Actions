@@ -146,8 +146,16 @@ paths:
                 text:
                   type: string
                   description: Text to ingest
+                pinecone_api_key:
+                  type: string
+                  description: "PINECONE_API_KEY=xxxxxxx"
+                openai_api_key:
+                  type: string
+                  description: "OPENAI_API_KEY=xxxxxxx"
               required:
                 - text
+                - pinecone_api_key
+                - openai_api_key
   /semantic_search_memory:
     post:
       description: semantic search memory
@@ -166,8 +174,16 @@ paths:
                 query:
                   type: string
                   description: Query to semantic search
+                pinecone_api_key:
+                  type: string
+                  description: "PINECONE_API_KEY=xxxxxxx"
+                openai_api_key:
+                  type: string
+                  description: "OPENAI_API_KEY=xxxxxxx"
               required:
                 - query
+                - pinecone_api_key
+                - openai_api_key
   /convert_mermaid_to_imgur:
     post:
       description: convert mermaid to imgur
