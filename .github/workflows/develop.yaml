@@ -3,7 +3,7 @@ name: Deploy to AWS Lambda
 on:
   push:
     branches:
-      - main
+      - develop
     paths:
       - 'src/**'
 
