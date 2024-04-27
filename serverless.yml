@@ -239,7 +239,7 @@ functions:
           integration: lambda-proxy
           private: true
   notion_search:
-    memorySize: 1024
+    memorySize: 2048
     maximumEventAge: 21600
     maximumRetryAttempts: 0
     image:
