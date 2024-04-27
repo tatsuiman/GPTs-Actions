@@ -4,11 +4,12 @@ import re
 import logging
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
-from slacklib import get_thread_messages
+from slacklib import SlackClient
 
 
-def extract_slack_url(url):
+def extract_slack_url(url, bot_token):
     messages = ""
+    slack_client = SlackClient(bot_token=bot_token)
     try:
         # URLからチャンネルIDとメッセージのタイムスタンプを抽出
         url_pattern = r"slack\.com/archives/([A-Z0-9]+)/p(\d{10})(\d{6})"
@@ -17,7 +18,9 @@ def extract_slack_url(url):
             channel_id = match[0]
             thread_ts = match[1] + "." + match[2]
             if channel_id:
-                thread_messages = get_thread_messages(channel_id, thread_ts)
+                thread_messages = slack_client.get_thread_messages(
+                    channel_id, thread_ts
+                )
                 logging.info(f"[{channel_id}] {len(thread_messages)} messages")
                 if len(thread_messages) > 0:
                     for msg in thread_messages:
@@ -34,9 +37,9 @@ def extract_slack_url(url):
     return messages
 
 
-def run(url):
+def run(url, bot_token):
     message = ""
-    message_history = extract_slack_url(url)
+    message_history = extract_slack_url(url, bot_token)
     if len(message_history) > 0:
         message = f"# チャット履歴\n{message_history}"
     return message

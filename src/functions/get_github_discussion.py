@@ -2,9 +2,8 @@ import os
 import requests
 
 
-def run(github_url: str) -> str:
+def run(github_url: str, github_token: str) -> str:
     owner, repo_name = github_url.split("/")[-2:]
-    github_token = os.getenv("GITHUB_TOKEN")
     result = f"# {owner}/{repo_name}のディスカッション\n"
     # GraphQLクエリ
     query = """

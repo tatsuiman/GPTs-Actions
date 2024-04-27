@@ -23,8 +23,12 @@ paths:
                 url:
                   type: string
                   description: URL of the Slack thread
+                bot_token:
+                  type: string
+                  description: "BOT_TOKEN=xxxxx"
               required:
                 - url
+                - bot_token
   /open_slack_canvas_url:
     post:
       description: retrieve content from a slack canvas URL
@@ -42,8 +46,16 @@ paths:
                 url:
                   type: string
                   description: slack canvas URL
+                bot_token:
+                  type: string
+                  description: "BOT_TOKEN=xxxxx"
+                user_token:
+                  type: string
+                  description: "USER_TOKEN=xxxxx"
               required:
                 - url
+                - bot_token
+                - user_token
   /slack_search:
     post:
       description: search message history in Slack
@@ -61,7 +73,11 @@ paths:
                 keyword:
                   type: string
                   description: Keywords or phrases to search for
+                user_token:
+                  type: string
+                  description: "USER_TOKEN=xxxxx"
               required:
                 - keyword
+                - user_token
 components:
   schemas: {}

@@ -27,8 +27,12 @@ paths:
                 code:
                   type: string
                   description: Code to execute
+                spreadsheet_id:
+                  type: string
+                  description: "GAS_SPREADSHEET_ID=xxxxx"
               required:
                 - title
                 - code
+                - spreadsheet_id
 components:
   schemas: {}

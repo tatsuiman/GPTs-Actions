@@ -2,15 +2,12 @@ import os
 import requests
 
 
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-
-
-def run(repo_name: str) -> str:
+def run(repo_name: str, github_token: str) -> str:
     """README.mdとレポジトリのdescriptionを取得します"""
-    if not GITHUB_TOKEN:
+    if not github_token:
         return "GITHUB_TOKENが設定されていません。"
 
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    headers = {"Authorization": f"token {github_token}"}
     repo_response = requests.get(
         f"https://api.github.com/repos/{repo_name}", headers=headers
     )

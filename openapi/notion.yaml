@@ -26,9 +26,17 @@ paths:
                 content:
                   type: string
                   description: Content of the page
+                notion_secret:
+                  type: string
+                  description: "NOTION_SECRET=xxxxx"
+                database_id:
+                  type: string
+                  description: "NOTION_DATABASE_ID=xxxxx"
               required:
                 - title
                 - content
+                - notion_secret
+                - database_id
   /notion_search:
     post:
       description: search within Notion pages and databases
@@ -46,8 +54,12 @@ paths:
                 keyword:
                   type: string
                   description: Keywords to search for
+                notion_secret:
+                  type: string
+                  description: "NOTION_SECRET=xxxxx"
               required:
                 - keyword
+                - notion_secret
   /open_notion_url:
     post:
       description: retrieve content from a Notion page using NotionAPI
@@ -65,7 +77,38 @@ paths:
                 url:
                   type: string
                   description: URL of the Notion page
+                notion_secret:
+                  type: string
+                  description: "NOTION_SECRET=xxxxx"
               required:
                 - url
+                - notion_secret
+  /append_notion_page:
+    post:
+      description: append content to a Notion page
+      operationId: appendNotionPage
+      x-openai-isConsequential: false
+      tags:
+        - Append
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page_id:
+                  type: string
+                  description: ID of the Notion page
+                content:
+                  type: string
+                  description: Content to append
+                notion_secret:
+                  type: string
+                  description: "NOTION_SECRET=xxxxx"
+              required:
+                - page_id
+                - content
+                - notion_secret
 components:
   schemas: {}

@@ -6,92 +6,6 @@ info:
 servers:
   - url: https://xxxxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev
 paths:
-  /create_notion_page:
-    post:
-      description: create a page in Notion with specified title and content
-      operationId: createNotionPage
-      x-openai-isConsequential: false
-      tags:
-        - Notion
-        - Create
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                  description: Title of the page
-                content:
-                  type: string
-                  description: Content of the page
-              required:
-                - title
-                - content
-  /append_notion_page:
-    post:
-      description: append content to a Notion page
-      operationId: appendNotionPage
-      x-openai-isConsequential: false
-      tags:
-        - Notion
-        - Update
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                page_id:
-                  type: string
-                  description: Notion page id
-                content:
-                  type: string
-                  description: Content to append
-              required:
-                - page_id
-                - content
-  /open_slack_url:
-    post:
-      description: retrieve message list from a Slack URL
-      operationId: getSlackMessages
-      x-openai-isConsequential: false
-      tags:
-        - Retrieve
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                url:
-                  type: string
-                  description: URL of the Slack thread
-              required:
-                - url
-  /open_notion_url:
-    post:
-      description: retrieve content from a Notion page using NotionAPI
-      operationId: getNotionContent
-      x-openai-isConsequential: false
-      tags:
-        - Retrieve
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                url:
-                  type: string
-                  description: URL of the Notion page
-              required:
-                - url
   /open_url:
     post:
       description: open a specified URL and retrieve its content
@@ -111,164 +25,6 @@ paths:
                   description: URL to open
               required:
                 - url
-  /open_slack_canvas_url:
-    post:
-      description: retrieve content from a slack canvas URL
-      operationId: getSlackCanvasContent
-      x-openai-isConsequential: false
-      tags:
-        - Retrieve
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                url:
-                  type: string
-                  description: slack canvas URL
-              required:
-                - url
-  /google_drive_search:
-    post:
-      description: search for file names in Google Drive
-      operationId: googleDriveSearch
-      x-openai-isConsequential: false
-      tags:
-        - Search
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                keyword:
-                  type: string
-                  description: Keywords to search for
-              required:
-                - keyword
-  /slack_search:
-    post:
-      description: search message history in Slack
-      operationId: slackSearch
-      x-openai-isConsequential: false
-      tags:
-        - Search
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                keyword:
-                  type: string
-                  description: Keywords or phrases to search for
-              required:
-                - keyword
-  /notion_search:
-    post:
-      description: search within Notion pages and databases
-      operationId: notionSearch
-      x-openai-isConsequential: false
-      tags:
-        - Search
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                keyword:
-                  type: string
-                  description: Keywords to search for
-              required:
-                - keyword
-  /open_github_repo:
-    post:
-      description: get README and description of a Github repository
-      operationId: openGithubRepo
-      x-openai-isConsequential: false
-      tags:
-        - Retrieve
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                repo_name:
-                  type: string
-                  description: Github repository name (e.g. tatsuiman/slack-copilot)
-              required:
-                - repo_name
-  /open_github_url:
-    post:
-      description: open a specified URL and retrieve its content
-      operationId: openGithubUrl
-      x-openai-isConsequential: false
-      tags:
-        - Retrieve
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                url:
-                  type: string
-                  description: Github URL to open (PR, Issue, Code, etc.)
-              required:
-                - url
-  /github_search:
-    post:
-      description: search within GitHub for Issues, Pull Requests, and code
-      operationId: githubSearch
-      x-openai-isConsequential: false
-      tags:
-        - Search
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                keyword:
-                  type: string
-                  description: Keywords to search for (e.g. 'openai slack')
-                lang:
-                  type: string
-                  description: 'Language (None: all languages)'
-                org:
-                  type: string
-                  description: 'GitHub organization name (None: all organizations)'
-              required:
-                - keyword
-  /google_search:
-    post:
-      description: search within Google
-      operationId: googleSearch
-      x-openai-isConsequential: false
-      tags:
-        - Search
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                keyword:
-                  type: string
-                  description: Keyword using Google Hacking Techniques.(e.g. 'site:twitter.com')
-              required:
-                - keyword
   /trend_search:
     post:
       description: generate trend search urls
@@ -329,25 +85,6 @@ paths:
                   description: Keyword using Youtube search.
               required:
                 - keyword
-  /get_github_discussion:
-    post:
-      description: retrieve discussion list from a Github Discussion URL
-      operationId: getGithubDiscussion
-      x-openai-isConsequential: false
-      tags:
-        - Retrieve
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                url:
-                  type: string
-                  description: URL of the Github Discussion
-              required:
-                - url
   /fact_checker:
     post:
       description: check the veracity of claims or news using Google's Fact Check Tools API
@@ -385,8 +122,12 @@ paths:
                 keyword:
                   type: string
                   description: Keywords to search for
+                intelx_api_key:
+                  type: string
+                  description: "INTELX_API_KEY=xxxxxxx"
               required:
                 - keyword
+                - intelx_api_key
   /ingest_memory:
     post:
       description: ingest memory
@@ -405,8 +146,16 @@ paths:
                 text:
                   type: string
                   description: Text to ingest
+                pinecone_api_key:
+                  type: string
+                  description: "PINECONE_API_KEY=xxxxxxx"
+                openai_api_key:
+                  type: string
+                  description: "OPENAI_API_KEY=xxxxxxx"
               required:
                 - text
+                - pinecone_api_key
+                - openai_api_key
   /semantic_search_memory:
     post:
       description: semantic search memory
@@ -425,8 +174,16 @@ paths:
                 query:
                   type: string
                   description: Query to semantic search
+                pinecone_api_key:
+                  type: string
+                  description: "PINECONE_API_KEY=xxxxxxx"
+                openai_api_key:
+                  type: string
+                  description: "OPENAI_API_KEY=xxxxxxx"
               required:
                 - query
+                - pinecone_api_key
+                - openai_api_key
   /convert_mermaid_to_imgur:
     post:
       description: convert mermaid to imgur
@@ -446,7 +203,11 @@ paths:
                 script:
                   type: string
                   description: Mermaid script
+                imgur_client_id:
+                  type: string
+                  description: "IMGUR_CLIENT_ID=xxxxxxx"
               required:
                 - script
+                - imgur_client_id
 components:
   schemas: {}

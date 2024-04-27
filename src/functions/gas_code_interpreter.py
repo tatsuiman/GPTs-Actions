@@ -5,11 +5,14 @@ from uuid import uuid4
 from google.oauth2.service_account import Credentials
 
 SERVICE_ACCOUNT_FILE = "data/service_account.json"
-SPREADSHEET_ID = os.environ.get("GAS_SPREADSHEET_ID")
-SHEET_NAME = os.environ.get("GAS_SHEET_NAME", "Sheet1")
 
 
-def run(title, code):
+def run(
+    title,
+    code,
+    spreadsheet_id=os.environ.get("GAS_SPREADSHEET_ID"),
+    sheet_name=os.environ.get("GAS_SHEET_NAME", "Sheet1"),
+):
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive",
@@ -21,8 +24,8 @@ def run(title, code):
     # 認証情報を取得
     gc = gspread.authorize(credentials)
 
-    wb = gc.open_by_key(SPREADSHEET_ID)
-    ws = wb.worksheet(SHEET_NAME)
+    wb = gc.open_by_key(spreadsheet_id)
+    ws = wb.worksheet(sheet_name)
     # 挿入するデータ
     run_id = uuid4().hex
     insert_data = [run_id, title, code]

@@ -2,12 +2,11 @@ import os
 import requests
 
 
-def run(url):
-    GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-    if not GITHUB_TOKEN:
+def run(url, github_token):
+    if not github_token:
         return "GITHUB_TOKENが設定されていません。"
 
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    headers = {"Authorization": f"token {github_token}"}
     # GitHubのURLをrawのURLに変換
     if "/pull/" in url or "/issues/" in url or "/commit/" in url:
         # PRまたはIssueまたはcommitのURLの場合、APIを使用して内容を取得

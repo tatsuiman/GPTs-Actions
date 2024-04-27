@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Google検索 API
-  description: ""
+  description: ''
   version: v1.0.0
 servers:
   - url: https://xxxxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev
@@ -23,7 +23,15 @@ paths:
                 keyword:
                   type: string
                   description: Keyword using Google Hacking Techniques.(e.g. 'site:twitter.com')
+                google_api_key:
+                  type: string
+                  description: GOOGLE_API_KEY=xxxxxxxxx
+                google_cse_id:
+                  type: string
+                  description: GOOGLE_CSE_ID=xxxxxxxxxxx
               required:
                 - keyword
+                - google_api_key
+                - google_cse_id
 components:
   schemas: {}

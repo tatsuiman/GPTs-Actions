@@ -1,15 +1,16 @@
 import os
 import json
 import logging
+from datetime import datetime
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
 
-def run(keyword: str) -> str:
+def run(keyword: str, user_token: str) -> str:
     """Slackのメッセージと関連情報を検索できます。検索キーワードとなる日本語の文字列を入力してください。"""
 
     # Slackクライアントの初期化
-    client = WebClient(token=os.getenv("SLACK_USER_TOKEN"))
+    client = WebClient(token=user_token)
 
     try:
         # メッセージを検索
@@ -29,7 +30,9 @@ def run(keyword: str) -> str:
                         and message["channel"]["is_im"] == False
                     ):
                         logging.debug(f'{message["permalink"]}\n')
-                        messages += f"<@{message['user']}>: {message['text']}\n"
+                        timestamp = float(message["ts"])
+                        dt_object = datetime.fromtimestamp(timestamp)
+                        messages += f"[{dt_object.isoformat()}] <@{message['user']}>: {message['text']}\n"
                 # レスポンスの作成
                 return (
                     f"#チャット履歴\n{messages}\n---\n"

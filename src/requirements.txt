@@ -6,6 +6,7 @@ PyGithub
 requests
 selenium
 pluginbase
+timeout-decorator
 youtube-transcript-api
 functions-framework
 sentry-sdk

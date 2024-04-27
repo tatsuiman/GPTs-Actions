@@ -5,8 +5,6 @@ import requests
 from tempfile import mkdtemp
 from tools import browser_open
 
-IMGUR_CLIENT_ID = os.getenv("IMGUR_CLIENT_ID")
-
 
 def mermaid_to_image(mermaid_script):
     png_file = os.path.join(mkdtemp(), "mermaid.png")
@@ -37,11 +35,11 @@ def mermaid_to_image(mermaid_script):
 
 
 # convert mermaid to imgur
-def run(script):
+def run(script, imgur_client_id: str) -> str:
     png_file = mermaid_to_image(script)
     # upload imgur
     headers = {
-        "authorization": f"Client-ID {IMGUR_CLIENT_ID}",
+        "authorization": f"Client-ID {imgur_client_id}",
     }
     files = {
         "image": (open(png_file, "rb")),
